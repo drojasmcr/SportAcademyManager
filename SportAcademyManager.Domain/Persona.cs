@@ -12,5 +12,6 @@ namespace SportAcademyManager.Domain
         public String SecondLastName { get; set; }
         public String Identification { get; set; }
         public String HomeAddress { get; set; }
+        public String Phone { get; set; }
     }
 }
