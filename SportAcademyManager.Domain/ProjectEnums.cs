@@ -1,6 +1,6 @@
 ﻿namespace SportAcademyManager.Domain
 {
-    public enum StroongFoot
+    public enum StrongFoot
     {
         Left,
         Right,

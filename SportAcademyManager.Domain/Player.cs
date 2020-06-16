@@ -6,13 +6,16 @@ namespace SportAcademyManager.Domain
 {
     public class Player : Persona
     {
-        public Player()
+        public List<PlayerPosition> PlayerPositions { get; set; }
+        public StrongFoot StrongFoot { get; set; }
+        public ICollection<PlayerSkill> PlayersSkills { get; set; }
+        public Player(string name, string lastName, string secondLastName,
+            string identification, string homeAddress, string phone, StrongFoot strongFoot) 
+            : base(name, lastName, secondLastName, identification, homeAddress, phone)
         {
             PlayerPositions = new List<PlayerPosition>();
-            Skills = new List<Skill>();
+            StrongFoot = strongFoot;
         }
-        List<PlayerPosition> PlayerPositions { get; set; }
-        public StroongFoot StroongFoot { get; set; }
-        public List<Skill> Skills { get; set; }
+
     }
 }

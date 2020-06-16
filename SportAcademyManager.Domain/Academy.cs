@@ -9,6 +9,7 @@ namespace SportAcademyManager.Domain
         public String Name { get; set; }
         public List<Category> Categories { get; set; }
         public List<Team> Teams { get; set; }
+        public String Address { get; set; }
 
         public bool Equals(Academy other)
         {

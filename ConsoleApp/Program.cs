@@ -44,6 +44,7 @@ class Program
         var academy = new Academy
         {
             Name = "Velez Jr",
+            Address = "Alajuela, Costa Rica",
             Categories = new List<Category>(),
             Teams = new List<Team>()
         };
@@ -108,7 +109,7 @@ class Program
         return category;
     }
 
-    public static Team AddTeamAndReturnIt(String name, Category category)
+    public static Team AddTeamAndReturnIt(string name, Category category)
     {
         var team = new Team
         {
@@ -117,5 +118,15 @@ class Program
         };
         context.Teams.Add(team);
         return team;
+    }
+
+    public static Player AddPlayerAndReturnIt(string identification, StrongFoot strongFoot,
+        string name, string lastName, string secondLastName, string homeAddress, string phone) 
+    {
+        var player = new Player(name, lastName, secondLastName, identification, homeAddress, phone, strongFoot);
+
+        context.Players.Add(player);
+
+        return player;
     }
 }
