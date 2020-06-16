@@ -13,7 +13,9 @@ namespace SportAcademyManager.Data
         public DbSet<Parent> Parents { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Academy> Academies { get; set; }
 
+        String connectionString = "Data Source=.;Initial Catalog=SportAcademyManager;Integrated Security=True";
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Persona>()
@@ -22,6 +24,12 @@ namespace SportAcademyManager.Data
                 .HasValue<Player>(0)
                 .HasValue<Trainer>(1)
                 .HasValue<Parent>(2);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(connectionString);
+            
         }
     }
 }

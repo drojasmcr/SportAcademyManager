@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportAcademyManager.Domain", "SportAcademyManager.Domain\SportAcademyManager.Domain.csproj", "{C4E7ED28-9A0C-4993-A755-18D25920B80C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportAcademyManager.Data", "SportAcademyManager.Data\SportAcademyManager.Data.csproj", "{AD759426-4A28-4B74-B441-2A1BDF7BF228}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportAcademyManager.Data", "SportAcademyManager.Data\SportAcademyManager.Data.csproj", "{AD759426-4A28-4B74-B441-2A1BDF7BF228}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{037C1E4D-DC96-4ED7-8AB5-F253584505E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{AD759426-4A28-4B74-B441-2A1BDF7BF228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD759426-4A28-4B74-B441-2A1BDF7BF228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD759426-4A28-4B74-B441-2A1BDF7BF228}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037C1E4D-DC96-4ED7-8AB5-F253584505E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037C1E4D-DC96-4ED7-8AB5-F253584505E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037C1E4D-DC96-4ED7-8AB5-F253584505E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037C1E4D-DC96-4ED7-8AB5-F253584505E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
