@@ -10,8 +10,8 @@ class Program
     private static SportAcademyManagerContext context = new SportAcademyManagerContext();
     static void Main(string[] args)
     {
-        context.Database.EnsureCreated();
-        GetAcademy();
+        context.Database.EnsureCreated();        
+
         var category = AddCategoryAndReturnIt("2008", new DateTime(2008,01,01), new DateTime(2008,12,31));
         var category2 = AddCategoryAndReturnIt("2009", new DateTime(2009, 01, 01), new DateTime(2009, 12, 31));
         var category3 = AddCategoryAndReturnIt("2007", new DateTime(2007, 01, 01), new DateTime(2007, 12, 31));
@@ -30,6 +30,43 @@ class Program
         var team7C = AddTeamAndReturnIt("2007-C", category3);
 
         var team10A = AddTeamAndReturnIt("2010-A", category4);
+
+        var skill = AddSkillAndReturnIt("Fast start");
+        var skill2 = AddSkillAndReturnIt("Strength and power");
+        var skill3 = AddSkillAndReturnIt("Spatial awareness");
+        var skill4 = AddSkillAndReturnIt("Passing accuracy");
+        var skill5 = AddSkillAndReturnIt("Balance and coordination");
+        var skill6 = AddSkillAndReturnIt("Ball control");
+        var skill7 = AddSkillAndReturnIt("Shooting");
+
+
+        var player = AddPlayerAndReturnIt("12345", StrongFoot.Both, 
+            "Phineas", "Lerwill", "Thornbarrow", "17259 Eastlawn Junction", "678-451-8037", "salliker8@walmart.com");
+        var player2 = AddPlayerAndReturnIt("44579", StrongFoot.Right, 
+            "Efrem", "Netting", "Leglise", "5 Rusk Park", "778-796-6629", "eleglise1@diigo.com");
+        var player3 = AddPlayerAndReturnIt("98563", StrongFoot.Right, 
+            "Lucie", "Eede", "Bradbeer", "93888 Victoria Parkway", "678-451-8037", "lbradbeer0@narod.ru");
+        var player4 = AddPlayerAndReturnIt("65322", StrongFoot.Left, 
+            "Calvin", "Cooling", "Moralee", "7650 Monterey Plaza", "678-451-8037", "cmoralee3@cmu.edu");
+
+        AddSkillToPlayer(player, skill);
+        AddSkillToPlayer(player, skill7);
+        AddSkillToPlayer(player2, skill4);
+        AddSkillToPlayer(player2, skill3);
+        AddSkillToPlayer(player2, skill6);
+        AddSkillToPlayer(player2, skill7);
+        AddSkillToPlayer(player3, skill2);
+        AddSkillToPlayer(player3, skill5);
+        AddSkillToPlayer(player3, skill6);
+        AddSkillToPlayer(player3, skill);
+
+
+        AddPlayerToTeam(player, team7A);
+        AddPlayerToTeam(player2, team9B);
+        AddPlayerToTeam(player3, team8A);
+        AddPlayerToTeam(player3, team7B);
+        AddPlayerToTeam(player4, team10A);
+
 
         AddAcademy(
             new List<Category> { category, category2, category3, category4}, 
@@ -130,9 +167,9 @@ class Program
         return skill;
     }
     public static Player AddPlayerAndReturnIt(string identification, StrongFoot strongFoot,
-        string name, string lastName, string secondLastName, string homeAddress, string phone) 
+        string name, string lastName, string secondLastName, string homeAddress, string phone, string email) 
     {
-        var player = new Player(name, lastName, secondLastName, identification, homeAddress, phone, strongFoot);
+        var player = new Player(name, lastName, secondLastName, identification, homeAddress, phone, strongFoot, email);
         context.Players.Add(player);
 
         return player;
@@ -152,6 +189,14 @@ class Program
 
     public static void AddPlayerToTeam(Player player, Team team)
     {
-        
+        var playerTeam = new PlayerTeam 
+        {
+            CurrentTeam = team,
+            CurrentPlayer = player, 
+            PlayerId = player.Id,
+            TeamId = team.Id
+        };
+
+        context.PlayerTeam.Add(playerTeam);
     }
 }

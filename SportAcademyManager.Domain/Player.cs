@@ -11,8 +11,8 @@ namespace SportAcademyManager.Domain
         public ICollection<PlayerSkill> PlayersSkills { get; set; }
         public ICollection<PlayerTeam> PlayerTeams { get; set; }
         public Player(string name, string lastName, string secondLastName,
-            string identification, string homeAddress, string phone, StrongFoot strongFoot) 
-            : base(name, lastName, secondLastName, identification, homeAddress, phone)
+            string identification, string homeAddress, string phone, StrongFoot strongFoot, string email) 
+            : base(name, lastName, secondLastName, identification, homeAddress, phone, email)
         {
             PlayerPositions = new List<PlayerPosition>();
             StrongFoot = strongFoot;

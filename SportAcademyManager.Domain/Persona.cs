@@ -13,9 +13,10 @@ namespace SportAcademyManager.Domain
         public String Identification { get; set; }
         public String HomeAddress { get; set; }
         public String Phone { get; set; }
+        public string Email { get; set; }
 
         public Persona(string name, string lastName, string secondLastName, 
-            string identification, string homeAddress, string phone)
+            string identification, string homeAddress, string phone, string email)
         {
             Name = name;
             LastName = lastName;
@@ -23,6 +24,7 @@ namespace SportAcademyManager.Domain
             Identification = identification;
             HomeAddress = homeAddress;
             Phone = phone;
+            Email = email;
         }
 
         public Persona()

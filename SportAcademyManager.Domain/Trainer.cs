@@ -8,8 +8,8 @@ namespace SportAcademyManager.Domain
     {
         public List<Team> TeamsInCharge { get; set; }
         public Trainer(string name, string lastName, string secondLastName,
-            string identification, string homeAddress, string phone)
-            : base(name, lastName, secondLastName, identification, homeAddress, phone)
+            string identification, string homeAddress, string phone, string email)
+            : base(name, lastName, secondLastName, identification, homeAddress, phone, email)
         {
             TeamsInCharge = new List<Team>();
         }
