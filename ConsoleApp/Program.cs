@@ -222,15 +222,19 @@ class Program
 
     public static void AddPlayerToTeam(Player player, Team team)
     {
-        var playerTeam = new PlayerTeam
+        var playerTeamFound = context.PlayerTeam.FirstOrDefault( pt => pt.PlayerId == player.Id && pt.TeamId == team.Id);
+        if (playerTeamFound == null)
         {
-            CurrentTeam = team,
-            CurrentPlayer = player,
-            PlayerId = player.Id,
-            TeamId = team.Id
-        };
+            var playerTeam = new PlayerTeam
+            {
+                CurrentTeam = team,
+                CurrentPlayer = player,
+                PlayerId = player.Id,
+                TeamId = team.Id
+            };
 
-        context.PlayerTeam.Add(playerTeam);
+            context.PlayerTeam.Add(playerTeam);
+        }
     }
 }
 
