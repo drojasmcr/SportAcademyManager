@@ -120,13 +120,33 @@ class Program
         return team;
     }
 
+    public static Skill AddSkillAndReturnIt(string name)
+    {
+        var skill = new Skill 
+        { 
+            Name = name
+        };
+        context.Skills.Add(skill);
+        return skill;
+    }
     public static Player AddPlayerAndReturnIt(string identification, StrongFoot strongFoot,
         string name, string lastName, string secondLastName, string homeAddress, string phone) 
     {
         var player = new Player(name, lastName, secondLastName, identification, homeAddress, phone, strongFoot);
-
         context.Players.Add(player);
 
         return player;
+    }
+
+    public static void AddSkillToPlayer( Player player, Skill skill)
+    {
+        var skillPlayer = new PlayerSkill
+        { 
+            CurrentPlayer = player,
+            CurrentSkill = skill,
+            PlayerId = player.Id,
+            SkillId = skill.Id
+        };
+        context.PlayerSkill.Add(skillPlayer);
     }
 }
