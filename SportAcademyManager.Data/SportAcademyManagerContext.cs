@@ -20,6 +20,7 @@ namespace SportAcademyManager.Data
         String connectionString = "Data Source=.;Initial Catalog=SportAcademyManager;Integrated Security=True";
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<PlayerSkill>()
                 .HasKey( ps => new { ps.PlayerId, ps.SkillId } );
             modelBuilder.Entity<PlayerSkill>()

@@ -149,4 +149,9 @@ class Program
         };
         context.PlayerSkill.Add(skillPlayer);
     }
+
+    public static void AddPlayerToTeam(Player player, Team team)
+    {
+        
+    }
 }
