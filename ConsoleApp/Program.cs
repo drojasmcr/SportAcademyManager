@@ -31,15 +31,8 @@ class Program
 
         var team10A = AddTeamAndReturnIt("2010-A", category4);
 
-
-        var skill = AddSkillAndReturnIt("Fast start");
-        var skill2 = AddSkillAndReturnIt("Strength and power");
-        var skill3 = AddSkillAndReturnIt("Spatial awareness");
-        var skill4 = AddSkillAndReturnIt("Passing accuracy");
-        var skill5 = AddSkillAndReturnIt("Balance and coordination");
-        var skill6 = AddSkillAndReturnIt("Ball control");
-        var skill7 = AddSkillAndReturnIt("Shooting");
-
+        Skill skill, skill2, skill3, skill4, skill5, skill6, skill7;
+        AddSkills(out skill, out skill2, out skill3, out skill4, out skill5, out skill6, out skill7);
 
         var player = AddPlayerAndReturnIt("12345", StrongFoot.Both,
             "Ingeberg", "Meatyard", "Duffield", "	1 Heath Trail", "677-451-8037", "iduffield6@apache.org");
@@ -74,17 +67,45 @@ class Program
         AddPlayerToTeam(player4, team10A);
 
 
-        AddAcademy(
+        var result = AddAcademy(
             new List<Category> { category, category2, category3, category4 },
             new List<Team> { team8A, team8B, team8C, team9A, team9B, team9C, team7A, team7B, team7C, team10A },
             "Independiente", "Alajuela, Costa Rica");
 
-        GetAcademy();
+        if (result)
+        {
+            context.SaveChanges();
+            Display();
+        }
+        else
+        {
+            Display();
+            context.Dispose();
+        }
+        
+
+        
     }
 
-
-    public static void AddAcademy(List<Category> categories, List<Team> teams, string academyName, string address)
+    public static void AddSkills(out Skill skill, out Skill skill2, out Skill skill3, out Skill skill4, out Skill skill5, out Skill skill6, out Skill skill7)
     {
+        skill = AddSkillAndReturnIt("Fast start");
+        skill2 = AddSkillAndReturnIt("Strength and power");
+        skill3 = AddSkillAndReturnIt("Spatial awareness");
+        skill4 = AddSkillAndReturnIt("Passing accuracy");
+        skill5 = AddSkillAndReturnIt("Balance and coordination");
+        skill6 = AddSkillAndReturnIt("Ball control");
+        skill7 = AddSkillAndReturnIt("Shooting");
+    }
+
+    public static bool AddAcademy(List<Category> categories, List<Team> teams, string academyName, string address)
+    {
+        var academies = context.Academies.ToList();
+        if (academies.Contains(new Academy { Name = academyName }))
+        {
+            Console.WriteLine("Academy {0} already exists", academyName);
+            return false;
+        }
         var academy = new Academy
         {
             Name = academyName,
@@ -92,13 +113,7 @@ class Program
             Categories = new List<Category>(),
             Teams = new List<Team>()
         };
-
-        var academies = context.Academies.ToList();
-        if (academies.Contains(academy))
-        {
-            Console.WriteLine("Academy {0} already exists", academy.Name);
-            return;
-        }
+       
 
         foreach (var category in categories)
         {
@@ -111,10 +126,10 @@ class Program
         }
 
         context.Academies.Add(academy);
-        context.SaveChanges();
+        return true;
     }
 
-    private static void GetAcademy()
+    private static void Display()
     {
         var academies = context.Academies.ToList();
         foreach (var item in academies)
