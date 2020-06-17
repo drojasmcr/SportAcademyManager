@@ -16,10 +16,21 @@ namespace SportAcademyManager.Data
         public DbSet<Academy> Academies { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<PlayerSkill> PlayerSkill { get; set; }
+        public DbSet<PlayerTeam> PlayerTeam { get; set; }
 
-        String connectionString = "Data Source=.;Initial Catalog=SportAcademyManager;Integrated Security=True";
+        string connectionString = "Data Source=.;Initial Catalog=SportAcademyManager;Integrated Security=True";
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<PlayerTeam>()
+                .HasKey( pt => new { pt.PlayerId, pt.TeamId });
+            modelBuilder.Entity<PlayerTeam>()
+                .HasOne(pt => pt.CurrentPlayer)
+                .WithMany(p => p.PlayerTeams)
+                .HasForeignKey(pt => pt.PlayerId);
+            modelBuilder.Entity<PlayerTeam>()
+                .HasOne(pt => pt.CurrentTeam)
+                .WithMany(t => t.PlayerTeams)
+                .HasForeignKey( pt => pt.TeamId);
 
             modelBuilder.Entity<PlayerSkill>()
                 .HasKey( ps => new { ps.PlayerId, ps.SkillId } );
