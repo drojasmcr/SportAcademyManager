@@ -206,14 +206,18 @@ class Program
 
     public static void AddSkillToPlayer(Player player, Skill skill)
     {
-        var skillPlayer = new PlayerSkill
+        var skillPlayerFound = context.PlayerSkill.FirstOrDefault(sp => sp.PlayerId == player.Id && sp.SkillId == skill.Id);
+        if (skillPlayerFound == null)
         {
-            CurrentPlayer = player,
-            CurrentSkill = skill,
-            PlayerId = player.Id,
-            SkillId = skill.Id
-        };
-        context.PlayerSkill.Add(skillPlayer);
+            var skillPlayer = new PlayerSkill
+            {
+                CurrentPlayer = player,
+                CurrentSkill = skill,
+                PlayerId = player.Id,
+                SkillId = skill.Id
+            };
+            context.PlayerSkill.Add(skillPlayer);
+        }        
     }
 
     public static void AddPlayerToTeam(Player player, Team team)
