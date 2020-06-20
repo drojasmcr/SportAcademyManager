@@ -1,9 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SportAcademyManager.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SportAcademyManager.Data
 {
@@ -16,12 +12,25 @@ namespace SportAcademyManager.Data
         public DbSet<Team> Teams { get; set; }
         public DbSet<Academy> Academies { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Position> Positions { get; set; }
         public DbSet<PlayerSkill> PlayerSkill { get; set; }
         public DbSet<PlayerTeam> PlayerTeam { get; set; }
+        public DbSet<PlayerPosition> PlayerPositions { get; set; }
 
         string connectionString = "Data Source=.;Initial Catalog=SportAcademyManager;Integrated Security=True";
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<PlayerPosition>()
+                .HasKey(pp => new { pp.PlayerId, pp.PositionId});
+            modelBuilder.Entity<PlayerPosition>()
+                .HasOne(pp => pp.CurrentPlayer)
+                .WithMany(p => p.PlayersPositions)
+                .HasForeignKey( pp => pp.PlayerId);
+            modelBuilder.Entity<PlayerPosition>()
+                .HasOne(pp => pp.CurrentPosition)
+                .WithMany(p => p.PlayersPositions)
+                .HasForeignKey(pp => pp.PositionId);
+
             modelBuilder.Entity<PlayerTeam>()
                 .HasKey( pt => new { pt.PlayerId, pt.TeamId });
             modelBuilder.Entity<PlayerTeam>()

@@ -147,7 +147,13 @@ class Program
                 {
                     if (team.Category == category)
                     {
-                        Console.WriteLine("Team: {0}", team.Name);
+                        Console.WriteLine("---Team: {0}---", team.Name);
+                        Console.WriteLine("Players for of {0} team", team.Name);
+                        foreach (PlayerTeam playerTeam in team.PlayerTeams)
+                        {
+                            var player = context.Players.First(p => p.Id == playerTeam.PlayerId);
+                            Console.WriteLine("Player: {0} "  , player.Name);
+                        }
                     }
                 }
             }
@@ -249,6 +255,19 @@ class Program
             };
 
             context.PlayerTeam.Add(playerTeam);
+        }
+    }
+
+    public static void AddPositionToPlayer(Player player, Position position)
+    {
+        var playerPositionFound = context.PlayerPositions.FirstOrDefault(pp => pp.CurrentPlayer == player && pp.CurrentPosition == position);
+        if ( playerPositionFound == null)
+        {
+            var playerPosition = new PlayerPosition
+            {
+                CurrentPosition = position,
+                CurrentPlayer = player
+            };
         }
     }
 }
